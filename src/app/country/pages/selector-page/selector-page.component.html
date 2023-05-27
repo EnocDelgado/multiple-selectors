@@ -1,0 +1,48 @@
+<h1 class="mt-3">Nested Selectors</h1>
+<hr>
+
+<form [formGroup]="myForm">
+
+  <!-- Region -->
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Continent:</label>
+      <select formControlName="region"  class="form-control">
+        <option value="">-- Select continent --</option>
+        <option *ngFor="let region of regions" [value]="region">{{ region }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Countries -->
+  <div class="row mb-3" *ngIf="countriesByRegions.length > 0">
+    <div class="col">
+      <label class="form-label">Country:</label>
+      <select formControlName="country"  class="form-control">
+        <option value="">-- Select country --</option>
+        <option *ngFor="let country of countriesByRegions" [value]="country.cca3">{{ country.name }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Border -->
+  <div class="row mb-3" *ngIf="borders.length > 0">
+    <div class="col">
+      <label class="form-label">Border:</label>
+      <select formControlName="border"  class="form-control">
+        <option value="">-- Select border --</option>
+        <!-- <option *ngFor="let border of borders" [value]="border">{{ border }}</option> -->
+        <option *ngFor="let country of borders" [value]="country.cca3">{{ country.name }}</option>
+      </select>
+    </div>
+  </div>
+
+</form>
+
+<h3>Form</h3>
+<code>
+  {{ myForm.value | json }}
+</code>
+<p>
+  is form Valid: {{ myForm.valid }}
+</p>
